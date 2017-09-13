@@ -34,7 +34,7 @@ node ('master') {
     }
 
     stage ('promotion') {
-        dir('automation/bills-iot-python-dist') {
+        dir('bills-iot-python-dist/dist/') {
             def promotionConfig = [
               'buildName'          : env.JOB_NAME,
               'buildNumber'        : env.BUILD_NUMBER,
