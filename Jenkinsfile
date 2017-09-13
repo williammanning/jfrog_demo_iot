@@ -44,12 +44,8 @@ node ('master') {
             rtServer.promote promotionConfig
             reTagLatest (SOURCE_REPO)
             reTagLatest (PROMOTE_REPO)
-        }
-
-        // promote war file from gradle-release to gradle-prod
+          }
 
      }
+
 }
-
-
-  }
