@@ -12,6 +12,7 @@ node ('master') {
 
     stage ('Build & Deploy') {
       println "Getting ready to build & Deploy"
+      rtServer.publishBuildInfo buildInfo
     }
 
     stage ('Test') {
