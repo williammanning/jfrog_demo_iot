@@ -1,6 +1,7 @@
 node ('master') {
     def rtServer = Artifactory.newServer url: SERVER_URL, credentialsId: CREDENTIALS
     def buildInfo = Artifactory.newBuildInfo()
+    buildInfo.env.capture = true
 
     stage ('Dependencies') {
        println "Getting ready to build"
