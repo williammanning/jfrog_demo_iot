@@ -3,7 +3,7 @@ node ('master') {
     def buildInfo = Artifactory.newBuildInfo()
 
     stage ('Dependencies') {
-       println "Connecting to github"
+       println "Getting ready to build"
     }
 
 
