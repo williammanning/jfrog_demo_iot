@@ -10,12 +10,12 @@ node ('master') {
 
     }
 
-    stage ('build & deploy') {
-
+    stage ('Build & Deploy') {
+      println "Getting ready to build & Deploy"
     }
 
-    stage ('test') {
-
+    stage ('Test') {
+      println "Getting ready to build"
     }
 
     stage('Xray Scan') {
@@ -33,20 +33,20 @@ node ('master') {
          sleep 10
     }
 
-    stage ('promotion') {
+    stage ('Promotion') {
         dir('bills-iot-python-dist/dist/') {
             def promotionConfig = [
               'buildName'          : env.JOB_NAME,
               'buildNumber'        : env.BUILD_NUMBER,
               'targetRepo'         : PROMOTE_REPO,
               'comment'            : 'Python iOT goodness',
-              'sourceRepo'         : SOURCE_REPO,
+              'sourceRepo'         : REPO,
               'status'             : 'Released',
               'includeDependencies': false,
               'copy'               : true
             ]
             rtServer.promote promotionConfig
-            reTagLatest (SOURCE_REPO)
+            reTagLatest (REPO)
             reTagLatest (PROMOTE_REPO)
           }
 
