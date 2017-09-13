@@ -4,6 +4,9 @@ node ('master') {
 
     stage ('Dependencies') {
        println "Getting ready to build"
+       println env.JOB_NAME
+       println env.BUILD_NUMBER
+
     }
 
     stage ('build & deploy') {
@@ -26,7 +29,7 @@ node ('master') {
          } else {
               println "No Xray scan performed. To enable set XRAY_SCAN = YES"
          }
-         sleep 60
+         sleep 10
     }
 
     stage ('promotion') {
