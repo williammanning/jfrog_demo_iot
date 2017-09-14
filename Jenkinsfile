@@ -12,26 +12,20 @@ node ('master') {
 
     stage ('Build & Deploy') {
       println "Getting ready to build & Deploy"
+    }
+
+    stage ('Publish & Scan')
+      println "Getting ready to Publish & Scan"
       rtServer.publishBuildInfo buildInfo
-    }
-
-    stage ('Test') {
-      println "Getting ready to build"
-    }
-
-    stage('Xray Scan') {
-         if (XRAY_SCAN == "YES") {
-             def xrayConfig = [
-                'buildName'     : env.JOB_NAME,
-                'buildNumber'   : env.BUILD_NUMBER,
-                'failBuild'     : false
-              ]
-              def xrayResults = rtServer.xrayScan xrayConfig
-              echo xrayResults as String
-         } else {
-              println "No Xray scan performed. To enable set XRAY_SCAN = YES"
-         }
-         sleep 10
+      if (XRAY_SCAN == "YES") {
+             def scanConfig = [
+                'buildName'      : buildInfo.name,
+                'buildNumber'    : buildInfo.number,
+                'failBuild'      : false
+            ]
+            def scanResult = server.xrayScan scanConfig
+            echo scanResult as String
+        }
     }
 
     stage ('Promotion') {
