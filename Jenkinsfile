@@ -15,7 +15,7 @@ node ('master') {
       println "Getting ready to build & Deploy"
     }
 
-    stage ('Publish & Scan')
+    stage ('Publish & Scan') {
       println "Getting ready to Publish & Scan"
       rtServer.publishBuildInfo buildInfo
       if (XRAY_SCAN == "YES") {
